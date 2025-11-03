@@ -1,18 +1,28 @@
-// server.js - Fixed to use Gmail instead of SendGrid
-const express = require('express');
-const cors = require('cors');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
-const nodemailer = require('nodemailer');
-const nodeCron = require('node-cron');
-require('dotenv').config();
+// server.js - Fixed to use ES modules and Gmail instead of SendGrid
+import express from 'express';
+import cors from 'cors';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
+import nodemailer from 'nodemailer';
+import nodeCron from 'node-cron';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.get('/', (req, res) => {
+  res.send('✅ Backend is running successfully on Render!');
+});
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/taskmaster', {
@@ -337,7 +347,7 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-// === ADD THESE MISSING ROUTES === //
+// === ALL YOUR EXISTING ROUTES === //
 
 // Get all users (if needed for your frontend)
 app.get('/api/users', authMiddleware, async (req, res) => {
@@ -579,7 +589,7 @@ app.get('/api/test-gmail', authMiddleware, async (req, res) => {
   }
 });
 
-// === YOUR EXISTING ROUTES === //
+// === YOUR EXISTING AUTH ROUTES === //
 
 app.post('/api/register', async (req, res) => {
   try {

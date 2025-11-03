@@ -2,13 +2,13 @@
   "name": "taskmaster-backend",
   "version": "1.0.0",
   "description": "Backend for TaskMaster Pro",
-  "main": "backend/server.js",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "start": "node backend/server.js",
-    "dev": "nodemon backend/server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
-    "@sendgrid/mail": "^8.1.6",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
