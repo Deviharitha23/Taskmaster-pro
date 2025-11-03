@@ -243,7 +243,7 @@ const Login = ({ onLogin }) => {
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
       try {
-        const response = await fetch('http://localhost:5000/api/login', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/login`,  {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
